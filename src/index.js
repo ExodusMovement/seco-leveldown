@@ -15,7 +15,7 @@ function SecoDOWN (location) {
 SecoDOWN.prototype._open = function (opts, cb) {
   callback(async () => {
     this._seco = createSecoRW(this.location, opts.passphrase || 'Hi', opts.header)
-    if (!await exists(this.location)) {
+    if (!await exists(this.location) && opts.createIfMissing) {
       await this._seco.write('{}')
       this._data = {}
     } else this._data = JSON.parse(await this._seco.read())
