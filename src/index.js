@@ -1,4 +1,5 @@
 import { inherits } from 'util'
+import { gzip, gunzip } from './gzip'
 import { AbstractLevelDOWN } from 'abstract-leveldown'
 import createSecoRW from 'seco-rw'
 import exists from 'path-exists'
@@ -19,11 +20,11 @@ SecoDOWN.prototype._open = function (opts, cb) {
     opts.passphrase = opts.passphrase || Buffer.from('')
     this._seco = createSecoRW(this.location, opts.passphrase, opts.header)
     if (!await exists(this.location) && opts.createIfMissing) {
-      await this._seco.write('{}')
+      await this._seco.write(await gzip('{}'))
       this._data = {}
     } else {
       if (opts.errorIfExists) throw new Error('Database file exists and opts.errorIfExists is true')
-      this._data = JSON.parse(await this._seco.read())
+      this._data = JSON.parse(await gunzip(await this._seco.read()))
     }
   }, cb)
 }
@@ -37,7 +38,7 @@ SecoDOWN.prototype._close = function (cb) {
 
 // Internal Function
 SecoDOWN.prototype._write = async function () {
-  await this._writeQueue.add(() => this._seco.write(JSON.stringify(this._data)))
+  await this._writeQueue.add(async () => await this._seco.write(await gzip(JSON.stringify(this._data))))
 }
 
 SecoDOWN.prototype._put = function (key, val, opts, cb) {
