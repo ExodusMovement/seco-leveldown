@@ -14,7 +14,10 @@ function SecoDOWN (location) {
 
 SecoDOWN.prototype._open = function (opts, cb) {
   callback(async () => {
-    this._seco = createSecoRW(this.location, opts.passphrase || 'Hi', opts.header)
+    // If the password isn't set, default to an empty Buffer
+    // Needs to be this way for testing
+    opts.passphrase = opts.passphrase || Buffer.from('')
+    this._seco = createSecoRW(this.location, opts.passphrase, opts.header)
     if (!await exists(this.location) && opts.createIfMissing) {
       await this._seco.write('{}')
       this._data = {}
