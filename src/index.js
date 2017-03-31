@@ -65,6 +65,22 @@ SecoDOWN.prototype._del = function (key, opts, cb) {
   }, cb)
 }
 
+SecoDOWN.prototype._batch = function (operations, opts, cb) {
+  // Not sure if this is fully atomic
+  // If there is a get call right after a batch call...
+  callback(async () => {
+    operations.forEach(op => {
+      if (op.type === 'put') {
+        if (typeof op.value === 'undefined' || op.value === null) op.value = ''
+        this._data[op.key] = op.value
+      } else if (op.type === 'del') {
+        delete this._data[op.key]
+      } else throw new Error(`Invalid type ${op.type}`)
+    })
+    await this._write()
+  }, cb)
+}
+
 // our new prototype inherits from AbstractLevelDOWN
 inherits(SecoDOWN, AbstractLevelDOWN)
 
