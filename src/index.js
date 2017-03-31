@@ -21,7 +21,10 @@ SecoDOWN.prototype._open = function (opts, cb) {
     if (!await exists(this.location) && opts.createIfMissing) {
       await this._seco.write('{}')
       this._data = {}
-    } else this._data = JSON.parse(await this._seco.read())
+    } else {
+      if (opts.errorIfExists) throw new Error('Database file exists and opts.errorIfExists is true')
+      this._data = JSON.parse(await this._seco.read())
+    }
   }, cb)
 }
 
