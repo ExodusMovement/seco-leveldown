@@ -1,0 +1,40 @@
+{
+  "name": "seco-leveldown",
+  "version": "0.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "pretest": "standard",
+    "test": "tape -r babel-register **/*.test.js | tf-spec",
+    "posttest": "npm run build",
+    "build": "babel -D src -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ExodusMovement/seco-leveldown.git"
+  },
+  "author": "Exodus Movement, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ExodusMovement/seco-leveldown/issues"
+  },
+  "homepage": "https://github.com/ExodusMovement/seco-leveldown#readme",
+  "dependencies": {
+    "abstract-leveldown": "2.6.1",
+    "p-queue": "^1.0.0",
+    "p-wait-for": "^1.0.0",
+    "path-exists": "^3.0.0",
+    "seco-rw": "0.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-env": "^1.2.2",
+    "babel-register": "^6.24.0",
+    "rimraf": "^2.6.1",
+    "standard": "^9.0.2",
+    "tape": "^4.6.3"
+  },
+  "standard": {
+    "ignore": "lib/"
+  }
+}
