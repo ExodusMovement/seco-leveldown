@@ -60,7 +60,7 @@ SecoDOWN.prototype._get = function (key, opts, cb) {
 
 SecoDOWN.prototype._del = function (key, opts, cb) {
   callback(async () => {
-    this._data[key] = undefined
+    delete this._data[key]
     await this._write()
   }, cb)
 }
