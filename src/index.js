@@ -20,7 +20,8 @@ SecoDOWN.prototype._open = function (opts, cb) {
     // Needs to be this way for testing
     opts.passphrase = opts.passphrase || Buffer.from('')
     this._seco = createSecoRW(this.location, opts.passphrase, opts.header)
-    if (!await exists(this.location) && opts.createIfMissing) {
+    if (!await exists(this.location)) {
+      if (!opts.createIfMissing) throw new Error(`${this.location} does not exist`)
       await this._seco.write(await gzip('{}'))
       this._data = {}
     } else {

@@ -11,8 +11,7 @@ const testBuffer = new Buffer(
 
 require('abstract-leveldown/abstract/leveldown-test').args(SecoDOWN, test, testCommon)
 
-require('abstract-leveldown/abstract/open-test').args(SecoDOWN, test, testCommon)
-require('abstract-leveldown/abstract/open-test').open(SecoDOWN, test, testCommon)
+require('abstract-leveldown/abstract/open-test').all(SecoDOWN, test, testCommon)
 
 require('abstract-leveldown/abstract/del-test').all(SecoDOWN, test, testCommon)
 
