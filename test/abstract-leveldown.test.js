@@ -23,10 +23,10 @@ require('abstract-leveldown/abstract/put-test').all(SecoDOWN, test, testCommon)
 require('abstract-leveldown/abstract/put-get-del-test').all(SecoDOWN, test, testCommon, testBuffer)
 
 require('abstract-leveldown/abstract/batch-test').all(SecoDOWN, test, testCommon)
-// require('abstract-leveldown/abstract/chained-batch-test').all(SecoDOWN, test, testCommon)
+require('abstract-leveldown/abstract/chained-batch-test').all(SecoDOWN, test, testCommon)
 
 require('abstract-leveldown/abstract/close-test').close(SecoDOWN, test, testCommon)
 
-// require('abstract-leveldown/abstract/iterator-test').all(SecoDOWN, test, testCommon)
+require('abstract-leveldown/abstract/iterator-test').all(SecoDOWN, test, testCommon)
 
-// require('abstract-leveldown/abstract/ranges-test').all(SecoDOWN, test, testCommon)
+require('abstract-leveldown/abstract/ranges-test').all(SecoDOWN, test, testCommon)

@@ -21,6 +21,8 @@
   "homepage": "https://github.com/ExodusMovement/seco-leveldown#readme",
   "dependencies": {
     "abstract-leveldown": "2.6.1",
+    "ltgt": "^2.1.3",
+    "object.entries": "^1.0.4",
     "p-queue": "^1.0.0",
     "p-wait-for": "^1.0.0",
     "path-exists": "^3.0.0",

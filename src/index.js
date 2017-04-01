@@ -1,6 +1,7 @@
 import { inherits } from 'util'
 import { gzip, gunzip } from './gzip'
 import { AbstractLevelDOWN } from 'abstract-leveldown'
+import SecoIterator from './iterator'
 import createSecoRW from 'seco-rw'
 import exists from 'path-exists'
 import PQueue from 'p-queue'
@@ -79,6 +80,10 @@ SecoDOWN.prototype._batch = function (operations, opts, cb) {
     })
     await this._write()
   }, cb)
+}
+
+SecoDOWN.prototype._iterator = function (opts) {
+  return new SecoIterator(this, opts)
 }
 
 // our new prototype inherits from AbstractLevelDOWN
