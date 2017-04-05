@@ -55,7 +55,7 @@ SecoDOWN.prototype._get = function (key, opts, cb) {
   callback(async () => {
     let val = this._data[key]
     if (typeof val === 'undefined') throw new Error('NotFound')
-    if (opts.asBuffer !== false && !Buffer.isBuffer(val)) val = new Buffer(String(val))
+    if (opts.asBuffer !== false && !Buffer.isBuffer(val)) val = Buffer.from(String(val))
     return val
   }, cb)
 }

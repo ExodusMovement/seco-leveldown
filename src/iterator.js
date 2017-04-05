@@ -23,8 +23,8 @@ SecoIterator.prototype._next = function (cb) {
   if (this._i >= this._data.length || this._i === this._opts.limit) return process.nextTick(() => cb())
   let key = this._data[this._i][0]
   let val = String(this._data[this._i][1])
-  if (this._opts.keyAsBuffer !== false && !Buffer.isBuffer(key)) key = new Buffer(key)
-  if (this._opts.valueAsBuffer !== false && !Buffer.isBuffer(val)) val = new Buffer(val)
+  if (this._opts.keyAsBuffer !== false && !Buffer.isBuffer(key)) key = Buffer.from(key)
+  if (this._opts.valueAsBuffer !== false && !Buffer.isBuffer(val)) val = Buffer.from(val)
   process.nextTick(() => cb(undefined, key, val))
 }
 
